@@ -1,0 +1,44 @@
+//1. 
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+void format_name(char *name) {
+    if (name[0] != '\0') {
+        name[0] = toupper((unsigned char)name[0]);
+        for (int i = 1; name[i] != '\0'; i++) {
+            name[i] = tolower((unsigned char)name[i]);
+        }
+    }
+}
+
+int main() {
+    char input[100];
+    fgets(input, sizeof(input), stdin);
+    input[strcspn(input, "\n")] = '\0';  // Remove newline character
+
+    char first_name[50] = "";
+    char last_name[50] = "";
+
+    // Tokenize the input string
+    char *token = strtok(input, " ");
+    if (token != NULL) {
+        strcpy(first_name, token);
+        token = strtok(NULL, " ");
+        if (token != NULL) {
+            strcpy(last_name, token);
+        }
+    }
+
+    // Format the names
+    format_name(first_name);
+    format_name(last_name);
+
+    if (strlen(last_name) > 0)
+        printf("%s %s\n", first_name, last_name);
+    else
+        printf("%s\n", first_name);
+
+    return 0;
+}
