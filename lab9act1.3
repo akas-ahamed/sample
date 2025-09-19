@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+void format(char *s) {
+    if (s[0] != '\0') {
+        s[0] = toupper(s[0]);
+        for (int i = 1; s[i] != '\0'; i++) {
+            s[i] = tolower(s[i]);
+        }
+    }
+}
+
+int main() {
+    char first[50], last[50] = "N/A";
+
+    // Read input (first and last, or only first)
+    int n = scanf("%s %s", first, last);
+
+    // Format names
+    format(first);
+    if (n == 2) {   // if last name entered
+        format(last);
+    }
+
+    printf("%s %s\n", first, last);
+    return 0;
+}
